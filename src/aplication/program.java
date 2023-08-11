@@ -28,33 +28,31 @@ public class program {
 		else {
 			reservation reser = new reservation(number, checkin, checkount);
 			System.out.print("Reservation:" + reser);
-			
+
 			System.out.println();
-			
+
 			System.out.println(" Enter data to update the reservation: ");
 			System.out.print("Check-in: (dd/MM/yyyy): ");
 			checkin = sdf.parse(sc.next());
 			System.out.print("Check-Out: (dd/MM/yyyy): ");
 			checkount = sdf.parse(sc.next());
 
-			Date now = new Date();
-			if (checkin.before(now) || checkount.before(now)) {
+			String error = reser.updateDates(checkin, checkount);
 
-				System.out.print("Error in reservation: Reservation dates for update must be future dates");
+			if (error != null) {
 
-			} else if (!checkount.after(checkin)) {
+				System.out.print("Error in reservation:"  + error);
 
-				System.out.print("Error in reservation: Reservation dates ");
-
-			}
-
+			} 
+			
 			else {
-				reser.updateDates(checkin, checkount);
+
 				System.out.print("Reservation:" + reser);
 			}
 
-			sc.close();
 		}
 
+		sc.close();
 	}
+
 }
